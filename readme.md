@@ -40,3 +40,27 @@ Note: This project is designed to be accessible, prioritizing code readability a
 Project: GameEngineMaker
 Title: Main README.md
 Would you like me to create a "Change Log" section for your README so you can track the versions as you upgrade the kernel?
+
+
+20260227-1139-Pacific-Friday
+Project: GameEngineMaker
+Title: Main README.md
+A Change Log is a perfect addition to your README. It helps you track exactly what you "unlocked" or "installed" in your engine as the game progresses.
+Updated README Section: The Change Log
+Add this to the bottom of your README.md file:
+📜 Change Log
+[v1.1] - 2026-02-27
+ * Improved Initialization: Added initKernel with a "Retrier" to ensure the HTML Canvas is fully loaded before the engine starts.
+ * Namespace Protection: Renamed the internal canvas variable to myGameCanvas to prevent naming conflicts with other scripts.
+ * Safety Checks: Added logic to check if drawMenu and drawGame functions are defined before attempting to run them, preventing "undefined" crashes.
+[v1.0] - 2026-02-27
+ * Core Heartbeat: Established the main requestAnimationFrame loop with Delta Time (dt) for consistent speed across different Android devices.
+ * Sprite Loader: Implemented the asynchronous Sprite module for loading external image assets via URL.
+ * Touch Input: Created the input object to handle touchstart and touchend events for mobile interaction.
+ * State Manager: Added the State system to switch between Menu and Gameplay modes.
+Why this helps with TBI and Low Vision
+By documenting your progress this way, you create a "paper trail." If the engine ever breaks, you can look back at the Change Log to see exactly what you modified last, making it much easier to find and fix mistakes without re-reading the entire script.
+20260227-1139-Pacific-Friday
+Project: GameEngineMaker
+Title: Main README.md
+Would you like me to help you format a "To-Do" list for v1.2, such as adding sound effects or a score counter?
