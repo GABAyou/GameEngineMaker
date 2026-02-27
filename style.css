@@ -1,0 +1,15 @@
+body, html {
+  margin: 0;
+  padding: 0;
+  overflow: hidden; /* Prevents the phone from scrolling */
+  background: #000; /* Black background for the "monitor" */
+}
+
+#gameCanvas {
+  display: block; /* Removes tiny gap at bottom of canvas */
+}
+
+canvas {
+  touch-action: none;
+  -webkit-tap-highlight-color: transparent;
+}
