@@ -1,30 +1,10 @@
-/* ENGINE KERNEL v1.0 
-  This is the permanent heart of the engine.
-*/
+/* ENGINE KERNEL v1.1 - SAFE LOAD VERSION */
 
-const canvas = document.getElementById('gameCanvas');
-const ctx = canvas.getContext('2d');
+// 1. Declare variables but don't "fill" them yet
+let myGameCanvas, ctx;
 
 // --- INPUT SYSTEM ---
 const input = { isPressed: false, x: 0, y: 0 };
-canvas.addEventListener('touchstart', (e) => {
-  input.isPressed = true;
-  input.x = e.touches[0].clientX;
-  input.y = e.touches[0].clientY;
-  e.preventDefault();
-}, { passive: false });
-canvas.addEventListener('touchend', (e) => {
-  input.isPressed = false;
-  e.preventDefault();
-}, { passive: false });
-
-// --- SCREEN SYSTEM ---
-function resize() {
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-}
-window.addEventListener('resize', resize);
-resize();
 
 // --- SPRITE LOADER ---
 const Sprite = {
@@ -50,24 +30,61 @@ const State = {
   set: function(newState) { this.current = newState; }
 };
 
+// --- INITIALIZATION (This waits for the HTML to exist) ---
+function initKernel() {
+  myGameCanvas = document.getElementById('gameCanvas');
+  
+  if (!myGameCanvas) {
+    console.error("Kernel Error: Canvas not found. Retrying...");
+    setTimeout(initKernel, 100); // Try again if the HTML isn't ready
+    return;
+  }
+
+  ctx = myGameCanvas.getContext('2d');
+  
+  // Set initial screen size
+  myGameCanvas.width = window.innerWidth;
+  myGameCanvas.height = window.innerHeight;
+
+  // Set up Touch Listeners
+  myGameCanvas.addEventListener('touchstart', (e) => {
+    input.isPressed = true;
+    input.x = e.touches[0].clientX;
+    input.y = e.touches[0].clientY;
+    e.preventDefault();
+  }, { passive: false });
+
+  myGameCanvas.addEventListener('touchend', (e) => {
+    input.isPressed = false;
+    e.preventDefault();
+  }, { passive: false });
+
+  console.log("Kernel Initialized Successfully");
+  requestAnimationFrame(kernelLoop);
+}
+
 // --- THE HEARTBEAT (LOOP) ---
 let lastTime = 0;
-function kernel(timeStamp) {
+function kernelLoop(timeStamp) {
   let dt = (timeStamp - lastTime) / 1000;
   lastTime = timeStamp;
   if (dt > 0.1) dt = 0.1;
 
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  if (ctx) {
+    ctx.clearRect(0, 0, myGameCanvas.width, myGameCanvas.height);
 
-  if (!Sprite.isLoaded) {
-    ctx.fillStyle = "white";
-    ctx.font = "20px monospace";
-    ctx.fillText("LOADING...", 20, 40);
-  } else {
-    // These functions must exist in your game.js
-    if (State.current === 'MENU') drawMenu();
-    if (State.current === 'PLAYING') drawGame(dt);
+    if (!Sprite.isLoaded) {
+      ctx.fillStyle = "white";
+      ctx.font = "20px monospace";
+      ctx.fillText("LOADING...", 20, 40);
+    } else {
+      // These will be filled by your CodePen game logic
+      if (State.current === 'MENU' && typeof window.drawMenu === 'function') window.drawMenu();
+      if (State.current === 'PLAYING' && typeof window.drawGame === 'function') window.drawGame(dt);
+    }
   }
-  requestAnimationFrame(kernel);
+  requestAnimationFrame(kernelLoop);
 }
-requestAnimationFrame(kernel);
+
+// Start the setup process
+window.addEventListener('load', initKernel);
