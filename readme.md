@@ -64,3 +64,23 @@ By documenting your progress this way, you create a "paper trail." If the engine
 Project: GameEngineMaker
 Title: Main README.md
 Would you like me to help you format a "To-Do" list for v1.2, such as adding sound effects or a score counter?
+
+20260227-1141-Pacific-Friday
+Project: GameEngineMaker
+Title: Main README.md
+Excellent. Adding a "Roadmap" or "To-Do" list to your README turns your GitHub into a mission log. For a developer managing TBI and low vision, this serves as a vital external memory to keep the project on track without mental fatigue.
+Updated README Section: Roadmap v1.2
+Add this below your Change Log:
+🚀 Roadmap: The Next Upgrades (v1.2)
+To advance the Kernel from a basic moving box to a "Real Engine," we are targeting these specific modules:
+ * Audio Engine: Create a Sound.play('file.mp3') function to handle music and sound effects.
+ * Collision Detection: Build a "Physical Rule" that detects when the player hits an enemy or an item.
+ * Score & UI: Implement a persistent Score variable and a way to display it clearly on the screen.
+ * Particle System: Add a tiny "Sparkle" or "Trail" effect when the player moves to make the engine feel more professional.
+Pro-Tip for your Library Session
+Since you are working with limited time, I recommend we tackle the Collision Detection next. It is the "brain" of the engine—it tells the game when something important has happened (like winning or losing).
+By documenting this in your README, you can just look at the list next time you sit down at the computer and know exactly where you left off.
+20260227-1141-Pacific-Friday
+Project: GameEngineMaker
+Title: Main README.md
+Would you like me to write the code for the "Collision Detection" module so it's ready for you to "install" into your kernel next time?
